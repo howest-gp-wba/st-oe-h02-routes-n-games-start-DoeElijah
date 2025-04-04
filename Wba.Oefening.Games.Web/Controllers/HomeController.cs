@@ -16,7 +16,7 @@ namespace Wba.Oefening.Games.Web.Controllers
         public IActionResult Index()
         {
             string RateAGame = "<h2>Rate-a-Game!</h2>";
-            RateAGame += "<nav><ul><li><a href='./Games'>Games</a></li><li><a href='./Developers'>Developers</a></li></ul> </nav>";
+            RateAGame += "<nav><ul style='list-style: none'><li><a href='./Games'>Games</a></li><li><a href='./Developers'>Developers</a></li></ul> </nav>";
             return Content(RateAGame, "text/html");
         }
 
