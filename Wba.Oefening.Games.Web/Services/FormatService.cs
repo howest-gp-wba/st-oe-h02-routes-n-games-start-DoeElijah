@@ -1,4 +1,5 @@
 ﻿using System.Text;
+using Microsoft.Extensions.Primitives;
 using Wba.Oefening.Games.Core.Entities;
 
 namespace Wba.Oefening.Games.Web.Services
@@ -10,7 +11,7 @@ namespace Wba.Oefening.Games.Web.Services
             StringBuilder sb = new StringBuilder();
             sb.Append("<h3>Game Info</h3>");
             sb.Append("<ul>");
-            sb.Append("<li>" + "Id: " + $"<a href='/Games/{game.Id}'>" + game.Id + "</a>" + "</li>").Append("<li>" + "Title: " + game.Title + "</li>").Append("<li>" + "Developer: " + game.Developer.Name + "</li>").Append("<li>" + "Rating: " + (game.Rating != null ? game.Rating : "Not specified") + "</li>");
+            sb.Append("<li>" + "Id: "  + game.Id + "</li>").Append("<li>" + "Title: " + $"<a href='/Games/{game.Id}'>" + game.Title + "</a></li>").Append("<li>" + "Developer: " + $"<a href='/Developers/{game.Developer.Id}'>" + game.Developer.Name + "</a>" + "</li>").Append("<li>" + "Rating: " + (game.Rating != null ? game.Rating : "Not specified") + "</li>");
             sb.Append("</ul>");
             return sb.ToString();
 
