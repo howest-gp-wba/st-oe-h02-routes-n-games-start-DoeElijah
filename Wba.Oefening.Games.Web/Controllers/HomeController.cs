@@ -2,8 +2,11 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Wba.Oefening.Games.Core.Entities;
+using Wba.Oefening.Games.Core.Repositories;
 using Wba.Oefening.Games.Web.Models;
 
 namespace Wba.Oefening.Games.Web.Controllers
@@ -12,7 +15,9 @@ namespace Wba.Oefening.Games.Web.Controllers
     {
         public IActionResult Index()
         {
-            return View();
+            string RateAGame = "<h2>Rate-a-Game!</h2>";
+            RateAGame += "<nav><ul><li><a href='./Games'>Games</a></li><li><a href='./Developers'>Developers</a></li></ul> </nav>";
+            return Content(RateAGame, "text/html");
         }
 
         
@@ -26,5 +31,8 @@ namespace Wba.Oefening.Games.Web.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
+
+
     }
 }

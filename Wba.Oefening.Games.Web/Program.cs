@@ -33,4 +33,15 @@ app.MapControllerRoute(
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+app.MapControllerRoute(
+    name: "Showdevelopers",
+    pattern: "Developers/All",
+    defaults: new { Controller = "Developers", action = "Index" }
+    );
+app.MapControllerRoute(
+    name: "Showdeveloper",
+    pattern: "Developers/{id:int}",
+    defaults: new { Controller = "Developers", action = "ShowDeveloper"}
+    );
+
 app.Run();

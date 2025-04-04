@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Text;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Primitives;
 using Wba.Oefening.Games.Core.Entities;
 using Wba.Oefening.Games.Core.Repositories;
 using Wba.Oefening.Games.Web.Services;
@@ -21,27 +23,23 @@ namespace Wba.Oefening.Games.Web.Controllers
          */
         public IActionResult ShowGame(int id)
         {
-            //get the game using the id(FirstOrDefault)
-            var game = _gameRepository
-                .GetGames()
-                .FirstOrDefault(g => g.Id == id);
-            //check if null
+
+            var game = _gameRepository.GetGames().FirstOrDefault(g => g.Id == id);
             if (game == null)
             {
-                return NotFound();
+                return NotFound("The game was not found.");
             }
-            //return content => FormatGameInfo(Game)
-            var title = game.Title;
+            //else format the game and it's properties and sent it back
             return Content(_formatService.FormatGameInfo(game), "text/html");
         }
 
         public IActionResult Index()
         {
             //get the games
-            var games = _gameRepository.GetGames();
-            //pass to the Format method
-            //and return to the client
-            return Content(_formatService.FormatGameInfo(games), "text/html");
+
+
+            return Content(_formatService.FormatGameInfo(_gameRepository.GetGames()), "text/html");
         }
+
     }
 }

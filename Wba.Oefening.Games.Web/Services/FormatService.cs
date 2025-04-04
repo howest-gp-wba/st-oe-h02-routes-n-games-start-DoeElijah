@@ -1,4 +1,5 @@
-﻿using Wba.Oefening.Games.Core.Entities;
+﻿using System.Text;
+using Wba.Oefening.Games.Core.Entities;
 
 namespace Wba.Oefening.Games.Web.Services
 {
@@ -6,23 +7,47 @@ namespace Wba.Oefening.Games.Web.Services
     {
         public string FormatGameInfo(Game game)
         {
-            string content = $"<ul>" +
-                $"<li>Id: {game?.Id ?? 0}</li>" +
-                $"<li>Title:<a href='/games/{game.Id}'>{game?.Title ?? "<NoTitle>"}</a></li>" +
-                $"<li>Developer: {game?.Developer?.Name ?? "<NoName>"}</li>" +
-                $"<li>Rating: {game?.Rating ?? 0}</li>" +
-                $"</ul";
-            return content;
-        }
+            StringBuilder sb = new StringBuilder();
+            sb.Append("<h3>Game Info</h3>");
+            sb.Append("<ul>");
+            sb.Append("<li>" + "Id: " + $"<a href='/Games/{game.Id}'>" + game.Id + "</a>" + "</li>").Append("<li>" + "Title: " + game.Title + "</li>").Append("<li>" + "Developer: " + game.Developer.Name + "</li>").Append("<li>" + "Rating: " + (game.Rating != null ? game.Rating : "Not specified") + "</li>");
+            sb.Append("</ul>");
+            return sb.ToString();
 
+
+        }
         public string FormatGameInfo(IEnumerable<Game> games)
         {
-            string content = "";
+
+
+            StringBuilder sb = new StringBuilder();
+
             foreach (Game game in games)
             {
-                content += FormatGameInfo(game);
+                sb.Append(FormatGameInfo(game));
             }
-            return content;
+            return sb.ToString();
+
+
+        }
+        public string FormatDeveloperInfo(Developer developer)
+        {
+            StringBuilder sb = new StringBuilder();
+
+            sb.Append("<h3>Developer Info</h3>");
+            sb.Append($"<ul>" +
+                $"<li>Id: " + developer.Id + "</li>" +
+                $"<li>Dev: " + $"<a href='/Developers/{developer.Id}'>" + developer.Name + "</a></li>" +
+                $"</ul>"
+                );
+            return sb.ToString();
+        }
+        public string FormatDeveloperInfo(IEnumerable<Developer> developers)
+        {
+            StringBuilder sb = new StringBuilder();
+
+            foreach (Developer dev in developers) { sb.Append(FormatDeveloperInfo(dev)); }
+            return sb.ToString();
         }
     }
 }
