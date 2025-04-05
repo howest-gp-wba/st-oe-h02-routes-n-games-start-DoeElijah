@@ -8,17 +8,20 @@ var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-    Console.WriteLine("In Development Env");
+
     app.UseExceptionHandler("/Home/Error");
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
 }
 else
 {
-    Console.WriteLine("In Production Env");
     app.UseExceptionHandler("/Home/CustomError");
     app.UseHsts();
 
 }
+
+app.UseStatusCodePagesWithReExecute("/Home/CustomError", "?code={0}");
+
+
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
@@ -48,6 +51,11 @@ app.MapControllerRoute(
     name: "Showdeveloper",
     pattern: "Developers/{id:int}",
     defaults: new { Controller = "Developers", action = "ShowDeveloper"}
+    );
+app.MapControllerRoute(
+    name: "ShowID",
+    pattern: "ShowID/{id:int}",
+    defaults: new { Controller = "Home", action = "FindByIndex" }
     );
 
 app.Run();

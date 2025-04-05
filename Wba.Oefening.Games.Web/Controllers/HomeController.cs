@@ -37,11 +37,16 @@ namespace Wba.Oefening.Games.Web.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-        [HttpOptions]
+        [HttpGet]
         public IActionResult FindByIndex(int id)
         {
-
-            return Content($"You searched for ${(id)}", "text/html");
+            int.Parse("not a number");
+            return RedirectToAction("CustomError", "Home");
+        }
+        public IActionResult StatusCode(int code)
+        {
+            ViewBag.ErrorCode = code;
+            return View();
         }
 
 
