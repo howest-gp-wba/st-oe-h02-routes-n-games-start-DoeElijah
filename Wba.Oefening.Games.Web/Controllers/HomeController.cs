@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml;
 using Microsoft.AspNetCore.Mvc;
 using Wba.Oefening.Games.Core.Entities;
 using Wba.Oefening.Games.Core.Repositories;
@@ -20,7 +21,11 @@ namespace Wba.Oefening.Games.Web.Controllers
             return Content(RateAGame, "text/html");
         }
 
-        
+        public IActionResult CustomError()
+        {
+            return View();
+        }
+
         public IActionResult Privacy()
         {
             return View();
@@ -30,6 +35,13 @@ namespace Wba.Oefening.Games.Web.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        [HttpOptions]
+        public IActionResult FindByIndex(int id)
+        {
+
+            return Content($"You searched for ${(id)}", "text/html");
         }
 
 
